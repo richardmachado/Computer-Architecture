@@ -17,12 +17,15 @@ numbers =  {
   19: 18,
   90: "fish"
 }
+
+sum = []
 #define the rules we want to iterate over it
 def addnumbers():
-    for key, val in number.items:
+    for key, val in numbers.items:
         if type(val) == int:
-            return val
-addnumbers(val)
+            sum.append(val)
+            
+
 #only get integers
 #add the integers
 #return the sum
