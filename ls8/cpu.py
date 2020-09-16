@@ -6,6 +6,10 @@ LDI = 0b10000010
 PRN = 0b01000111
 HLT = 0b00000001
 MUL = 0b10100010
+PUSH = 0b01000101
+POP = 0b01000110
+
+sp=7
 
 class CPU:
     """Main CPU class."""
@@ -16,6 +20,7 @@ class CPU:
         self.ram = [0] * 256
         self.reg = [0] * 8
         self.pc = 0
+        self.reg[sp] = 0xF4
 
 
     def ram_read(self, ram_address):
@@ -111,6 +116,14 @@ class CPU:
             elif ir == MUL:
                 self.alu(ir, operand_a, operand_b)
 
+            elif ir == PUSH:
+                self.reg[7] -= 1
+                self.ram[self.reg[sp]] = self.reg[operand_a]
+            
+            elif ir == POP:
+                self.reg[operand_a] = self.ram[self.reg[sp]]
+                self.reg[sp] += 1
+                
             else:
                 print('this is not working properly')
 
